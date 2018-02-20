@@ -22,6 +22,20 @@
         $message = "Someone has filled out the form.\n\n"
                     . "Name: $name Password: $password\n\n";
         $result = mail ($to, $subject, $message);
+        
+        //Connect to Database
+        $hostname = 'localhost';
+        $username = 'danielgi_dgirard';
+        $password = '912DanGirard!';
+        $database = 'danielgi_userform';
+        
+        $mysqli = new mysqli($hostname, $username, $password, $database);
+        
+        if ($mysqli->connect_errno){
+            echo "<p>MySQL Error" . $mysqli->error;
+        } else {
+            echo 'database connection successful';
+        }
     }
     ?>
     
