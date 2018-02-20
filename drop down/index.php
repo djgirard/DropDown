@@ -8,24 +8,28 @@
     <meta name="author" content="Dan">
     <link rel="stylesheet" type="text/css" href="style/global.css">
 </head>
-
+    
 <body>
-    <div id="container">
-        <div id="main">
-<form>
-
-    <select>
-<?php
-$name = 'Favorite Color';
+    <?php
+    echo "<pre>", print_r($_POST, true), "<pre>";
+    
+    if (isset($_POST['submit'])) {
+        $name = filter_var($_POST['name'], FILTER_SANITIZE_STRING);
+        $password = filter_var($_POST['password'], FILTER_SANITIZE_STRING);
         
-$colors = array('red', 'green', 'blue');
-foreach ($colors as $value) {
-    echo "<option value=\"$value\">$value</option>";
-}
-?>
-    </select>
+        $to = 'daniel_girard@emerson.edu';
+        $subject = 'New Form Results';
+        $message = "Someone has filled out the form.\n\n"
+                    . "Name: $name Password: $password\n\n";
+        $result = mail ($to, $subject, $message);
+    }
+    ?>
+    
+    <form method="post">
+        Name: <input type="text" name="name"><br>
+        Password: <input type="text" name="password"><br>
+    <input type="submit" name="submit" value="Submit">
     </form>
-    </div>
-    </div>
+    
+  
 </body>
-</html>
